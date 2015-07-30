@@ -54,10 +54,10 @@ def get_oai_properties(base_url, shortname, start_date, end_date):
         try:
             pre_names = all_prop_content.xpath('//ns0:metadata', namespaces=NAMESPACES)[0].getchildren()[0].getchildren()
         except IndexError:
-            raise ("There may be no records within your range, try setting date manually using.")
+            raise ("There may be no records within your range, try setting date manually.")
 
         all_names = [name.tag.replace('{' + NAMESPACES['dc'] + '}', '') for name in pre_names]
-        return list({name for name in all_names if name not in BASE_SCHEMA})
+        return list({name for name in all_names if name not in BASE_SCHEMA}) + ['setSpec']
 
     # If anything at all goes wrong, just render a blank form...
     except Exception as e:
