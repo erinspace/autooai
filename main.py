@@ -192,7 +192,7 @@ def generate_oai(baseurl, shortname, start_date, end_date):
 def main():
     args = parse_args()
 
-    #deafault range is one year.
+    #deafault range is two days
     if not args.daterange:
         startdate = (date.today() - timedelta(2)).isoformat()
         enddate = date.today().isoformat()
