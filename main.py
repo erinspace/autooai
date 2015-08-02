@@ -3,15 +3,22 @@ A command line utility for creating OAI harvesters for scrapi.
 
 Creates new files in a scrapi repo that is hosted one directory up from this one.
 
+usage: main.py [-h] [-b BASEURL] [-s SHORTNAME] [-dr DATERANGE] [-f] [-bp]
+
+A command line interface to create and commit a new harvester
+
+optional arguments:
   -h, --help            show this help message and exit
   -b BASEURL, --baseurl BASEURL
                         The base url for the OAI provider, everything before
                         the ?
   -s SHORTNAME, --shortname SHORTNAME
                         The shortname of the provider
+  -dr DATERANGE, --daterange DATERANGE
+                        date format must be isoformat YYYY-MM-DD:YYYY-MM-DD of
+                        query
   -f, --favicon         flag to signal saving favicon
-  -d DAYS_BACK, --days_back DAYS_BACK
-                        Number of days back to make the properties request
+  -bp, --bepress        flag to signal generating bepress list
 
 example usage: python main.py -b http://udspace.udel.edu/dspace-oai/request -s udel -f -d 30
 
