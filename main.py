@@ -28,6 +28,7 @@ import shutil
 from datetime import date
 from datetime import timedelta
 
+import re
 import vcr
 import furl
 import argparse
@@ -35,6 +36,7 @@ import requests
 import tldextract
 from lxml import etree
 
+URL_RE = re.compile(r'(https?:\/\/[^\/]*)')
 
 NAMESPACES = {'dc': 'http://purl.org/dc/elements/1.1/',
               'oai_dc': 'http://www.openarchives.org/OAI/2.0/',
@@ -94,8 +96,7 @@ class {2}Harvester(OAIHarvester):
 """.format(longname, ex_call, class_name, shortname, longname, normal_url, oai_url, prop_list, tz_gran)
 
 
-def simple_oai(class_name, shortname, longname, baseurl, prop_list, tz_gran):
-
+def simple_oai(class_name, shortname, longname, url, baseurl, prop_list, tz_gran):
     return """
 
 class {class_name}Harvester(OAIHarvester):
@@ -105,12 +106,12 @@ class {class_name}Harvester(OAIHarvester):
 
     short_name = '{shortname}'
     long_name = '{longname}'
-    url = '{baseurl}'
+    url = '{url}'
 
     base_url = '{baseurl}'
     property_list = {prop_list}
     timezone_granularity = {tz_gran}
-""".format(class_name=class_name, shortname=shortname, longname=longname, baseurl=baseurl, prop_list=prop_list, tz_gran=tz_gran)
+""".format(class_name=class_name, shortname=shortname, longname=longname, url=url, baseurl=baseurl, prop_list=prop_list, tz_gran=tz_gran)
 
 
 def get_id_props(baseurl):
@@ -164,6 +165,7 @@ def parse_args():
 
 def generate_bepress_text(baseurl, shortname, start_date, end_date):
     prop_list = get_oai_properties(baseurl, shortname, start_date, end_date)
+    found_url = URL_RE.search(baseurl).group()
 
     parts = shortname.replace('.', '').replace('-', '').split('_')
     class_name = ''
@@ -177,7 +179,7 @@ def generate_bepress_text(baseurl, shortname, start_date, end_date):
     else:
         tz_gran = False
 
-    return simple_oai(class_name, shortname, longname, baseurl, prop_list, tz_gran)
+    return simple_oai(class_name, shortname, longname, found_url, baseurl, prop_list, tz_gran)
 
 
 def generate_oai(baseurl, shortname, start_date, end_date):
@@ -188,12 +190,14 @@ def generate_oai(baseurl, shortname, start_date, end_date):
 
     longname, tz_gran = get_id_props(baseurl)
 
+    found_url = URL_RE.search(baseurl).group()
+
     if 'hh:mm:ss' in tz_gran:
         tz_gran = True
     else:
         tz_gran = False
 
-    return formatted_oai(ex_call, class_name, shortname, longname, baseurl, baseurl, prop_list, tz_gran)
+    return formatted_oai(ex_call, class_name, shortname, longname, found_url, baseurl, prop_list, tz_gran)
 
 
 def main():
