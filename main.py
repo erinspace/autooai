@@ -41,6 +41,7 @@ URL_RE = re.compile(r'(https?:\/\/[^\/]*)')
 NAMESPACES = {'dc': 'http://purl.org/dc/elements/1.1/',
               'oai_dc': 'http://www.openarchives.org/OAI/2.0/',
               'ns0': 'http://www.openarchives.org/OAI/2.0/'}
+
 BASE_SCHEMA = ['title', 'contributor', 'creator', 'subject',
                'description', 'language', 'publisher']
 
