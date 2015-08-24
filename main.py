@@ -56,8 +56,6 @@ def get_oai_properties(base_url, shortname, start_date, end_date):
         prop_base = furl.furl(base_url)
         prop_base.args['verb'] = 'ListRecords'
         prop_base.args['metadataPrefix'] = 'oai_dc'
-        prop_base.args['from'] = start_date
-        prop_base.args['until'] = end_date
 
         print('requesting {}'.format(prop_base.url))
         prop_data_request = requests.get(prop_base.url)
