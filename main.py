@@ -230,6 +230,7 @@ def main():
         generate_bepress()
 
 
+## TODO fix test generation!
 ## TODO add option for printng to standard out for testing
 ## TODO check for already existing harvester and don't make one if it exists
 ## TODO Break out test generation so on failing tests on scrapi can keep using tool
