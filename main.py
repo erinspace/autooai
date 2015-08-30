@@ -212,8 +212,7 @@ def main():
 
     print args.baseurl
     try:
-        with vcr.use_cassette('../scrapi/tests/vcr/{}.yaml'.format(args.shortname)):
-            args.baseurl + '?verb=ListRecords&metadataPrefix=oai_dc&from={}&until={}'.format(startdate, enddate)
+        args.baseurl + '?verb=ListRecords&metadataPrefix=oai_dc&from={}&until={}'.format(startdate, enddate)
     except Exception as e:
         raise ValueError('OAI Processing Error - {}'.format(e))
 
