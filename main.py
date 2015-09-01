@@ -210,13 +210,8 @@ def main():
     else:
         startdate, enddate = args.daterange.split(':')
 
-    print args.baseurl
-    try:
-        args.baseurl + '?verb=ListRecords&metadataPrefix=oai_dc&from={}&until={}'.format(startdate, enddate)
-    except Exception as e:
-        raise ValueError('OAI Processing Error - {}'.format(e))
-
     if args.baseurl:
+        print args.baseurl
         text = generate_oai(args.baseurl, args.shortname, startdate, enddate)
 
         with open('../scrapi/scrapi/harvesters/{}.py'.format(args.shortname), 'w') as outfile:
