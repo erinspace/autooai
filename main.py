@@ -29,7 +29,6 @@ from datetime import date
 from datetime import timedelta
 
 import re
-import vcr
 import furl
 import argparse
 import requests
