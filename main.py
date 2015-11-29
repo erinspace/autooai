@@ -60,7 +60,9 @@ def get_oai_properties(base_url, shortname, start_date, end_date):
         prop_data_request = requests.get(prop_base.url)
         all_prop_content = etree.XML(prop_data_request.content)
         try:
-            pre_names = all_prop_content.xpath('//ns0:metadata', namespaces=NAMESPACES)[0].getchildren()[0].getchildren()
+            pre_names = all_prop_content.xpath(
+                '//ns0:metadata', namespaces=NAMESPACES
+            )[0].getchildren()[0].getchildren()
         except IndexError:
             raise ("There may be no records within your range, try setting date manually.")
 
