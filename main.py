@@ -47,7 +47,6 @@ BASE_SCHEMA = ['title', 'contributor', 'creator', 'subject',
 
 def get_oai_properties(base_url, shortname, start_date, end_date):
     """ Makes a request to the provided base URL for the list of properties
-
         returns a dict with list of properties
     """
 
