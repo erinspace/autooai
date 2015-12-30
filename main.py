@@ -111,7 +111,15 @@ class {class_name}Harvester(OAIHarvester):
     base_url = '{baseurl}'
     property_list = {prop_list}
     timezone_granularity = {tz_gran}
-""".format(class_name=class_name, shortname=shortname, longname=longname, url=url, baseurl=baseurl, prop_list=prop_list, tz_gran=tz_gran)
+""".format(
+        class_name=class_name,
+        shortname=shortname,
+        longname=longname,
+        url=url,
+        baseurl=baseurl,
+        prop_list=prop_list,
+        tz_gran=tz_gran
+    )
 
 
 def get_id_props(baseurl):
