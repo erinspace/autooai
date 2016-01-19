@@ -43,7 +43,7 @@ Autooai is a command line tool that takes a few arguments and will generate a SH
 Here's an example of how to use this tool to generate a SHARE OAI harvester for the MIT repository:
 
 ```
-python main.py -b http://dspace.mit.edu/oai/request -s mit -f
+python autooai/main.py -b http://dspace.mit.edu/oai/request -s mit -f
 ```
 
 This will do a few things:
