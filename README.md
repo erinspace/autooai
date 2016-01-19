@@ -7,7 +7,7 @@ In order to automatically generate a harvester, it's assumed you'll have an API 
 For example, MIT has an OAI PMH endpoint, and one of the ways to access it is:
 http://dspace.mit.edu/oai/request?verb=Identify
 
-Since this tool is specfically for the SHARE project, you should be running commands from a directory that is inside a directory on the same level as your [scrapi](http://github.com/fabianvf/scrapi) (or SHARE core) directory.
+Since this tool is specifically for the SHARE project, you should be running commands from a directory that is inside a directory on the same level as your [scrapi](http://github.com/fabianvf/scrapi) (or SHARE core) directory.
 
 Your directory structure should be something like this:
 
@@ -28,7 +28,7 @@ scrapi/scrapi/harvesters
 
 From within the autooai directory...
 
-Install requirements using [pip](https://pypi.python.org/pypi/pip) inside a [virtual enviornment](https://virtualenv.pypa.io/en/latest/) by running 
+Install requirements using [pip](https://pypi.python.org/pypi/pip) inside a [virtual environment](https://virtualenv.pypa.io/en/latest/) by running 
 
 ```pip install -r requirements.txt```
 
@@ -48,7 +48,7 @@ python main.py -b http://dspace.mit.edu/oai/request -s mit -f
 
 This will do a few things:
 - Use the baseurl of http://dspace.mit.edu/oai/request to generate a harvester
-    + This baseurl is the begining of the oai endpoint, and includes everything before the ? in the oai pmh request url
+    + This baseurl is the beginning of the oai endpoint, and includes everything before the ? in the oai pmh request url
     + Example: http://repository.stcloudstate.edu/do/oai/
     + Not:  http://repository.stcloudstate.edu/do/oai/?verb=Identify
 - Use mit as the shortname when generating the harvester
