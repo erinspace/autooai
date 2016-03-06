@@ -172,6 +172,9 @@ def parse_args():
 
 
 def generate_bepress_text(baseurl, shortname, start_date, end_date):
+    """This is a one time use kind of function - will generate a file with
+    many harvesters from the bpress list of sites
+    """
     prop_list = get_oai_properties(baseurl, shortname, start_date, end_date)
     found_url = URL_RE.search(baseurl).group()
 
