@@ -24,16 +24,17 @@ example usage: python main.py -b http://udspace.udel.edu/dspace-oai/request -s u
 
 """
 
-import shutil
-from datetime import date
-from datetime import timedelta
-
 import re
 import furl
+import shutil
 import argparse
 import requests
 import tldextract
+from os import listdir
 from lxml import etree
+from datetime import date
+from datetime import timedelta
+from os.path import isfile, join
 
 URL_RE = re.compile(r'(https?:\/\/[^\/]*)')
 
@@ -211,10 +212,19 @@ def generate_oai(baseurl, shortname, start_date, end_date):
     return formatted_oai(ex_call, class_name, shortname, longname, found_url, baseurl, prop_list, tz_gran)
 
 
+def harvester_exists(shortname):
+    path = '../scrapi/scrapi/harvesters/'
+    onlyfiles = [f for f in listdir(path) if isfile(join(path, f))]
+    if shortname + '.py' in onlyfiles:
+        return True
+    else:
+        return False
+
+
 def main():
     args = parse_args()
 
-    #deafault range is two days
+    # deafault range is two days
     if not args.daterange:
         startdate = (date.today() - timedelta(2)).isoformat()
         enddate = date.today().isoformat()
@@ -224,6 +234,10 @@ def main():
     if args.baseurl:
         print args.baseurl
         text = generate_oai(args.baseurl, args.shortname, startdate, enddate)
+
+        if harvester_exists(args.shortname):
+            print('Harvester with this shortname already exists.')
+            return
 
         with open('../scrapi/scrapi/harvesters/{}.py'.format(args.shortname), 'w') as outfile:
             outfile.write(text)
@@ -237,7 +251,6 @@ def main():
 
 ## TODO fix test generation!
 ## TODO add option for printng to standard out for testing
-## TODO check for already existing harvester and don't make one if it exists
 ## TODO Break out test generation so on failing tests on scrapi can keep using tool
 
 
