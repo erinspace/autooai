@@ -26,6 +26,8 @@ scrapi/scrapi/harvesters
 ---
 ## Setup
 
+*autooai requires Python 2.7*
+
 From within the autooai directory...
 
 Install requirements using [pip](https://pypi.python.org/pypi/pip) inside a [virtual environment](https://virtualenv.pypa.io/en/latest/) by running 
@@ -42,8 +44,9 @@ Autooai is a command line tool that takes a few arguments and will generate a SH
 
 Here's an example of how to use this tool to generate a SHARE OAI harvester for the MIT repository:
 
-```
-python autooai/main.py -b http://dspace.mit.edu/oai/request -s mit -f
+```bash
+$ cd autooai
+$ python main.py -b http://dspace.mit.edu/oai/request -s mit -f
 ```
 
 This will do a few things:
